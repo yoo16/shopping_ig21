@@ -13,13 +13,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+
+Route::group([
+    'prefix' => 'cart',
+    'as' => 'cart.',
+], function() {
+    Route::get('/', 'CartController@index')->name('index');
+    Route::get('/add/{id}', 'CartController@add')->name('add');
+    Route::get('/remove/{id}', 'CartController@remove')->name('remove');
+    Route::get('/clear', 'CartController@clear')->name('clear');
+});
 
 Route::group([
     'prefix' => 'admin/item',
