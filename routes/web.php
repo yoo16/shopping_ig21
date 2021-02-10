@@ -22,9 +22,11 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
+//Cart
 Route::group([
     'prefix' => 'cart',
     'as' => 'cart.',
+    'middleware' => 'auth',
 ], function() {
     Route::get('/', 'CartController@index')->name('index');
     Route::get('/add/{id}', 'CartController@add')->name('add');
@@ -32,6 +34,7 @@ Route::group([
     Route::get('/clear', 'CartController@clear')->name('clear');
 });
 
+//Admin Item
 Route::group([
     'prefix' => 'admin/item',
     'namespace' => 'Admin',

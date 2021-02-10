@@ -17,7 +17,7 @@
       </p>
 
       <p class="row justify-content-center">
-        <a href="" class="btn btn-outline-primary">カートに入れる</a>
+        <a href="{{ route('cart.add', ['id' => $item->id]) }}" class="btn btn-outline-primary">カートに入れる</a>
       </p>
     </div>
     @endforeach
