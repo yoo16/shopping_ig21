@@ -5,7 +5,6 @@
       <th>{{ __('Item Name') }}</th>
       <th>{{ __('Price') }}</th>
       <th>{{ __('Amount') }}</th>
-      <th></th>
     </tr>
   </thead>
   @if (isset($items))
@@ -17,13 +16,7 @@
       </td>
       <td>{{ $item->name }}</td>
       <td>{{ $item->price }}</td>
-      <td>
-        <input class="form-control col-3 text-right" type="number" min="0" 
-        name="user_items[{{ $item->id }}]" value="{{ $user_items[$item->id]->amount }}">
-      </td>
-      <td>
-        <a class="btn btn-danger" href="{{ route('cart.remove', ['id' => $item->id]) }}">{{ __('Delete') }}</a>
-      </td>
+      <td>{{ $user_items[$item->id]->amount }}</td>
     </tr>
   </tbody>
   @endforeach

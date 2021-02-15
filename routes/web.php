@@ -34,6 +34,7 @@ Route::group([
     Route::get('/clear', 'CartController@clear')->name('clear');
     Route::get('/confirm', 'CartController@confirm')->name('confirm');
     Route::post('/updates', 'CartController@updates')->name('updates');
+    Route::post('/order', 'CartController@order')->name('order');
 });
 
 //Admin Item

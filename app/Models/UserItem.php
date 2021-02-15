@@ -96,8 +96,9 @@ class UserItem extends Model
     }
 
     static function updatesCart(Request $request, User $user) {
-        if (!$request->all()) return;
-        $request_items = $request->all()['user_items'];
+        //if (!$request->all()) return;
+        //$request_items = $request->all()['user_items'];
+        $request_items = $request->input('user_items');
         if (!$request_items) return;
         foreach ($request_items as $item_id => $amount) {
             $item = Item::find($item_id);
