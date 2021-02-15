@@ -23,7 +23,7 @@
         <td>{{ $item->name }}</td>
         <td>{{ $item->price }}</td>
         <td>
-          <input class="form-control col-3 text-right" type="text" name="amount" value="{{ $user_items[$item->id]->amount }}">
+          <input class="form-control col-3 text-right" type="number" min="0" name="amount" value="{{ $user_items[$item->id]->amount }}">
         </td>
         <td>
           <a class="btn btn-danger" href="{{ route('cart.remove', ['id' => $item->id]) }}">{{ __('Delete') }}</a>
@@ -33,5 +33,16 @@
     @endforeach
     @endif
   </table>
+
+  <div>
+    <label for="">{{ __('Total Price') }}:</label>
+    {{ $total_price }}
+  </div>
+
+  <div>
+    <p>
+      <a class="btn btn-outline-primary" href="{{ route('cart.confirm') }}">{{ __('Next') }}</a>
+    </p>
+  </div>
 </div>
 @endsection

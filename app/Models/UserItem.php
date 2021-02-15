@@ -85,6 +85,15 @@ class UserItem extends Model
         $request->session()->forget(self::$session_key);
     }
 
-    
+    static function calculateTotal(Request $request) {
+        $user_items = UserItem::sessionValues($request);
+        $total_price = 0;
+        if (empty($user_items)) return $total_price;
+        foreach ($user_items as $user_item) {
+            $total_price+= $user_item->price * $user_item->amount;
+        }
+        return $total_price;
+    }
+
 
 }
