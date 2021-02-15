@@ -95,5 +95,15 @@ class UserItem extends Model
         return $total_price;
     }
 
+    static function updatesCart(Request $request, User $user) {
+        if (!$request->all()) return;
+        $request_items = $request->all()['user_items'];
+        if (!$request_items) return;
+        foreach ($request_items as $item_id => $amount) {
+            $item = Item::find($item_id);
+            UserItem::updateCart($request, $user, $item, $amount);
+        }
+    }
+
 
 }

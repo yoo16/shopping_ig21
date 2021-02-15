@@ -62,4 +62,10 @@ class CartController extends Controller
         return view('cart.confirm', $data);
     }
 
+    public function updates(Request $request)
+    {
+        UserItem::updatesCart($request, $this->user);
+        return redirect()->route('cart.index');
+    }
+
 }

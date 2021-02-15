@@ -33,6 +33,7 @@ Route::group([
     Route::get('/remove/{id}', 'CartController@remove')->name('remove');
     Route::get('/clear', 'CartController@clear')->name('clear');
     Route::get('/confirm', 'CartController@confirm')->name('confirm');
+    Route::post('/updates', 'CartController@updates')->name('updates');
 });
 
 //Admin Item
