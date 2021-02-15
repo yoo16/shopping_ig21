@@ -7,6 +7,8 @@ use App\Models\Item;
 use App\Models\UserItem;
 use Illuminate\Support\Facades\Auth;
 
+use App\Facades\Cart;
+
 class CartController extends Controller
 {
     public function __construct()
@@ -20,20 +22,14 @@ class CartController extends Controller
     
     public function index(Request $request)
     {
-        $data = [];
-        if ($request->session()->has('user_items')) {
-            $user_items = UserItem::sessionValues($request);
-
-            //SELECT * FROM items WHERE id IN (xx, xx, xx);
-            $items = Item::whereIn('id', array_keys($user_items))->get();
-            $total_price = UserItem::calculateTotal($request);
-            $data = [
-                'user_items' => $user_items,
-                'items' => $items,
-                'total_price' => $total_price,
-            ];
-        }
+        $data = Cart::orderList($request);
         return view('cart.index', $data);
+    }
+
+    public function confirm(Request $request)
+    {
+        $data = Cart::orderList($request);
+        return view('cart.confirm', $data);
     }
 
     public function add(Request $request)
@@ -54,24 +50,6 @@ class CartController extends Controller
     {
         UserItem::clearCart($request);
         return redirect()->route('cart.index');
-    }
-
-    public function confirm(Request $request)
-    {
-        $data = [];
-        if ($request->session()->has('user_items')) {
-            $user_items = UserItem::sessionValues($request);
-
-            //SELECT * FROM items WHERE id IN (xx, xx, xx);
-            $items = Item::whereIn('id', array_keys($user_items))->get();
-            $total_price = UserItem::calculateTotal($request);
-            $data = [
-                'user_items' => $user_items,
-                'items' => $items,
-                'total_price' => $total_price,
-            ];
-        }
-        return view('cart.confirm', $data);
     }
 
     public function updates(Request $request)
