@@ -17,3 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group([
+    'prefix' => 'item',
+    'namespace' => 'API',
+],function() {
+    //http://xxxxxx/api/item/get
+    Route::get('get', 'ItemController@get');
+    Route::get('fetch/{id}', 'ItemController@fetch');
+});
